@@ -1,5 +1,4 @@
 .app-style {
-  padding: 100px;
   display: flex;
   gap: 12px;
 }
@@ -39,7 +38,7 @@
   margin-right: 10px;
 }
 
-.titldDiv {
+.titleDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,4 +65,8 @@
   font-weight: 700;
   height: 40px;
   width: 140px;
+}
+
+title {
+  justify-content: flex-start;
 }

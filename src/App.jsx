@@ -56,8 +56,12 @@ const App = () => {
     setUsers(updatedUsers);
   };
 
+  // 완료되지 않은 작업과 완료된 작업으로 나누기
+  const workingTasks = users.filter((user) => !user.isDone);
+  const doneTasks = users.filter((user) => user.isDone);
+
   return (
-    <div className="titldDiv">
+    <div className="titleDiv">
       <div className="MyTodoListReact">
         <div>My Todo List</div>
         <div>React</div>
@@ -75,17 +79,37 @@ const App = () => {
           </Button>
         </div>
       </div>
-      <div className="app-style">
-        {users.map(function (item) {
-          return (
-            <User
-              key={item.id}
-              item={item}
-              removeFunction={clickRemoveButtonHandler}
-              completeFunction={clickCompleteButtonHandler}
-            />
-          );
-        })}
+
+      {/* 작업 중인 작업 표시 */}
+      <div className="title">
+        <h2>Working.. 🔥</h2>
+        <div className="app-style">
+          {workingTasks.map(function (item) {
+            return (
+              <User
+                key={item.id}
+                item={item}
+                removeFunction={clickRemoveButtonHandler}
+                completeFunction={clickCompleteButtonHandler}
+              />
+            );
+          })}
+        </div>
+
+        {/* 완료된 작업 표시 */}
+        <h2>Done..! 🎉</h2>
+        <div className="app-style">
+          {doneTasks.map(function (item) {
+            return (
+              <User
+                key={item.id}
+                item={item}
+                removeFunction={clickRemoveButtonHandler}
+                completeFunction={clickCompleteButtonHandler}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
