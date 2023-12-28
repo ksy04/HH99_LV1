@@ -1,5 +1,4 @@
-// 필요한 모듈과 컴포넌트를 불러오는 부분
-// React와 useState는 React 라이브러리에서 가져오고 Button 및 User 컴포넌트는 각각 해당 파일에서 불러온다.
+// 필요한 모듈 useState과 컴포먼트 한 button, user을 불러온다
 import React, { useState } from "react";
 import "./App.css";
 import Button from "./components/Button";
@@ -30,19 +29,19 @@ const App = () => {
   // useState("")를 사용하여 상태를 초기화하고, 여기서도 초기값으로 빈 문자열("")을 전달하여 body 상태 변수의 초기값이 빈 문자열이 되도록 함
 
   // 이렇게 선언된 상태 변수들은 컴포넌트가 렌더링될 때 초기값("")으로 설정되고 이후에는 각각의 set 함수를 사용하여 값을 업데이트할 수 있음
-  // 이러한 상태 변수는 컴포넌트가 렌더링될 때부터 시작하여 사용자와의 상호작용이나 동적인 변화에 따라 값이 변경되는 변수임.
+  // 이러한 상태 변수는 컴포넌트가 렌더링될 때부터 시작하여 사용자와의 상호작용하기 위함임.
   // 그래서 이러한 상태 변수를 사용하여 컴포넌트의 상태를 추적하고 관리할 수 있음.
   const [body, setBody] = useState("");
 
   // 이벤트 핸들러: 입력 필드의 값이 변경될 때마다 호출됨
   const bodyChangeHandler = (event) => {
-    // 입력 필드의 값을 이용하여 setBody 함수를 통해 body 상태를 업데이트
+    // 입력한 값이 event.target.value로 들어옴
     setBody(event.target.value);
   };
 
   // 이벤트 핸들러: 입력 필드의 값이 변경될 때마다 호출됨
   const titleChangeHandler = (event) => {
-    // 입력 필드의 값을 이용하여 setTitle 함수를 통해 title 상태를 업데이트
+    // 입력한 값이 event.target.value로 들어옴
     setTitle(event.target.value);
   };
 
@@ -51,8 +50,8 @@ const App = () => {
     // 새로운 사용자 객체를 생성
     const newUser = {
       id: users.length + 1, // 현재 사용자 수에 1을 더한 값을 새로운 사용자의 ID로 설정
-      title: title, // 입력된 제목을 새로운 사용자의 제목으로 설정
-      body: body, // 입력된 내용을 새로운 사용자의 내용으로 설정
+      title, // 입력된 제목을 새로운 사용자의 제목으로 설정
+      body, // 입력된 내용을 새로운 사용자의 내용으로 설정
       isDone: false, // 새로운 사용자는 완료되지 않은 상태로 초기화.
     };
 
@@ -64,18 +63,19 @@ const App = () => {
     setBody("");
   };
 
-  // 삭제 버튼 클릭 이벤트 핸들러: 특정 ID의 사용자를 제외하고 나머지 사용자로 업데이트
+  // 삭제버튼 이벤트
   const clickRemoveButtonHandler = (id) => {
-    // filter 함수를 사용하여 특정 ID의 사용자를 제외한 사용자들로 이루어진 새로운 배열을 생성
+    // filter 함수 사용해서 내가 선택한 id값 외에 것들만 배열로 생성
     const updatedUsers = users.filter((user) => user.id !== id);
 
     // setUsers 함수를 사용하여 업데이트된 배열로 사용자 상태를 업데이트
     setUsers(updatedUsers);
   };
 
-  // 완료 버튼 클릭 이벤트 핸들러: 특정 ID의 사용자의 'isDone' 속성을 토글하고 사용자 목록을 업데이트
+  // 완료버튼 이벤트: 특정 ID의 사용자의 'isDone' 속성을 토글하고 사용자 목록을 업데이트
   const clickCompleteButtonHandler = (id) => {
     // 일치하는 사용자인 경우 해당 사용자 객체를 복사({ ...user })하여 새로운 객체를 생성하고 'isDone' 속성을 현재의 반대 값으로 토글(T -> F)(F -> T)
+    // 일치하지 않으면 원래의 값 반환
     const updatedUsers = users.map((user) =>
       user.id === id ? { ...user, isDone: !user.isDone } : user
     );
